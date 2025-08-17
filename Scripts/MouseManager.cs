@@ -1,14 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events; // 添加此行
+using UnityEngine.Events;
 
-[System.Serializable] // 修正拼写
-
+[System.Serializable]
 public class EventVector3 : UnityEvent<Vector3> {}
 
 public class MouseManager : MonoBehaviour
 {
+    RaycastHit hitInfo;
     public EventVector3 OnMouseClicked;
+
+    void Update()
+    {
+        SetCursorTexture();
+        MouseControl();
+    }
+    void SetCursorTexture() // 修正方法名
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); // 修正拼写
+        if(Physics.Raycast(ray, out hitInfo)) // 修正拼写
+        {
+            //切换鼠标贴图
+        }
+    }
+    void MouseControl()
+    {
+        if(Input.GetMouseButtonDown(0) && hitInfo.collider != null) // 修正拼写
+        {
+            if(hitInfo.collider.gameObject.CompareTag("Ground")) // 修正拼写
+                OnMouseClicked?.Invoke(hitInfo.point); // 修正拼写
+        }
+    }
 }
-    
