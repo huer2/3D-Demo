@@ -11,6 +11,7 @@ public class MouseManager : MonoBehaviour
 
     RaycastHit hitInfo;
     public event Action<Vector3> OnMouseClicked;
+    public event Action<GameObject> OnEnemyClicked;
     public Texture2D point,doorway,attack,target,arrow;
     void Awake()
     {
@@ -39,9 +40,6 @@ public class MouseManager : MonoBehaviour
                 case "Door":
                     Cursor.SetCursor(doorway, new Vector2(16,16), CursorMode.Auto);                  
                     break;
-                case "Attack":
-                    Cursor.SetCursor(attack, new Vector2(16,16), CursorMode.Auto); 
-                    break;
                 case "Ground":
                     Cursor.SetCursor(target, new Vector2(16,16), CursorMode.Auto);
                     break;
@@ -51,19 +49,24 @@ public class MouseManager : MonoBehaviour
                 default:
                     Cursor.SetCursor(null, new Vector2(16,16), CursorMode.Auto); 
                     break;
+                case "Enemy":
+                    Cursor.SetCursor(attack, new Vector2(16,16), CursorMode.Auto);
+                    break;
             }
         }
         else
         {
-            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto); // ÐÞÕýÆ´Ð´
+            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto); 
         }
     }
     void MouseControl()
     {
-        if(Input.GetMouseButtonDown(0) && hitInfo.collider != null) // ÐÞÕýÆ´Ð´
+        if(Input.GetMouseButtonDown(0) && hitInfo.collider != null) 
         {
-            if(hitInfo.collider.gameObject.CompareTag("Ground")) // ÐÞÕýÆ´Ð´
+            if(hitInfo.collider.gameObject.CompareTag("Ground")) 
                 OnMouseClicked?.Invoke(hitInfo.point); 
+            if(hitInfo.collider.gameObject.CompareTag("Enemy")) 
+                OnEnemyClicked?.Invoke(hitInfo.collider.gameObject);
         }
     }
 }
