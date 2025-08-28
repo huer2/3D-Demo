@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NewBehaviourScript
   maxHealth: 100
   currentHealth: 100
-  baseDefense: 5
-  currentDefense: 5
+  baseDefense: 2
+  currentDefense: 2
