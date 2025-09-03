@@ -20,7 +20,7 @@ public class EnemyController : MonoBehaviour,IEndGameobserver
 
     private Animator anim;
     private Collider coll;
-    private CharacterStats characterStats;
+    protected CharacterStats characterStats;
 
     [Header("Basic Settings")]
     public bool isGuard = true; // Ä¬ÈÏÖµ
@@ -261,7 +261,7 @@ public class EnemyController : MonoBehaviour,IEndGameobserver
     // Animation Event
     void Hit()   
     {
-        if(attackTarget != null)
+        if(attackTarget != null&&transform.IsFacingTarget(attackTarget.transform))
         {
             var targetStats = attackTarget.GetComponent<CharacterStats>();
             targetStats.TakeDamage(characterStats, targetStats);

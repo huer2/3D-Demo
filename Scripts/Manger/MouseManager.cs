@@ -57,11 +57,13 @@ public class MouseManager : Singleton<MouseManager>
     }
     void MouseControl()
     {
-        if(Input.GetMouseButtonDown(0) && hitInfo.collider != null) 
+        if (Input.GetMouseButtonDown(0) && hitInfo.collider != null)
         {
-            if(hitInfo.collider.gameObject.CompareTag("Ground")) 
-                OnMouseClicked?.Invoke(hitInfo.point); 
-            if(hitInfo.collider.gameObject.CompareTag("Enemy")) 
+            if (hitInfo.collider.gameObject.CompareTag("Ground"))
+                OnMouseClicked?.Invoke(hitInfo.point);
+            if (hitInfo.collider.gameObject.CompareTag("Enemy"))
+                OnEnemyClicked?.Invoke(hitInfo.collider.gameObject);
+            if(hitInfo.collider.gameObject.CompareTag("Attackable")) 
                 OnEnemyClicked?.Invoke(hitInfo.collider.gameObject);
         }
     }
